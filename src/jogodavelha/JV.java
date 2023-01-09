@@ -2,9 +2,11 @@ package jogodavelha;
 
 public class JV {
 
+	private int jogadas = 0;
+
 	private String[][] m = { { "1", "2", "3" }, { "4", "5", "6" }, { "7", "8", "9" } };
 
-	// esses for são pra andar as linhas.
+	// esses for sï¿½o pra andar as linhas.
 	public String Mostrar() {
 		for (int li = 0; li < 3; li++) {// vai ler a linha
 			for (int co = 0; co < 3; co++) {// ler as colunas.
@@ -47,11 +49,11 @@ public class JV {
 			m[2][2] = j;
 	}
 
-	public String Ganhou(int Jogadas) {// saber quem ganhou o jogo, o vetor e de 8 posicoe porque sao as possiblidades
+	public String Ganhou() {// saber quem ganhou o jogo, o vetor e de 8 posicoe porque sao as possiblidades
 										// de ganhar
 		String[] T = new String[8];
 		String vencedor = "null";
-		if (Jogadas == 9) {
+		if (jogadas == 9) {
 			vencedor = "EMPATE";
 		}
 		T[0] = m[0][0] + m[0][1] + m[0][2];//possiveis formas de ganhar o jogo.
@@ -67,9 +69,9 @@ public class JV {
 
 		for (int i = 0; i < T.length; i++) {// for pra varrer o vetor
 			if (T[i].equals("XXX")) {
-				vencedor = "Jogador 1";
+				return "Jogador 1";
 			} else if (T[i].equals("OOO")) {
-				vencedor = "Jogador 2";
+				return "Jogador 2";
 			}
 		}
 		return vencedor;

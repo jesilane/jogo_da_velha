@@ -9,55 +9,47 @@ public class Main {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		JV jogo=new JV();
-		String posicao;
-		int valida=0, jogadas=0;
 		
 		while(true) {
 			System.out.println("________________JOGO DA VELHA________________");
 			jogo.Mostrar();
 			
-			do {				
-				System.out.println("Jogador 1 informe uma posição: ");
-				posicao=sc.next();
-				while(!jogo.Valido(posicao)) {
-					System.out.println("Jogada Invalida, Tente novamente:");
-					System.out.println("Jogador 1, informe uma posição: ");
-					posicao= sc.next();
-					valida=0;
-				}
-				jogo.Jogada(posicao, "X");
-				valida=1;
-				
-			}while(valida==0);
-			
-			jogadas++;
-			valida=0;
-			if(!jogo.Ganhou(jogadas).equals("null")) {
-				break;
-			}
-			do {
-
-				System.out.println("Jogador 2 informe uma posição que vai jogar:");
-				posicao=sc.next();
-				while(!jogo.Valido(posicao)) {
-					System.out.println("Jogada Invalida, Tente novamente:");
-					System.out.println("Jogador 2, informe uma posição: ");
-					posicao= sc.next();
-					valida=0;
-				}
-				jogo.Jogada(posicao, "O");
-				valida=1;
+			for(int jogador=1; jogador <=2; jogador++) {
+				jogar(jogo, jogador);
 				jogo.Mostrar();
-			}while(valida==0);
-			
-			jogadas++;
-			valida=0;
-			if(!jogo.Ganhou(jogadas).equals("null")) {
-				break;
+				if(!jogo.Ganhou().equals("null")) {
+					System.out.println("O jogador " + jogador + " venceu!");
+					return;
+				}
 			}
 		}
 		
-		System.out.println("O"+ jogo.Ganhou(jogadas)+" venceu");
+	}
+
+	public static boolean jogar(JV jogo, int jogador){
+		int valida = 0;
+		String posicao;
+		String letraJogador = "";
+		if(jogador == 1) {
+			letraJogador = "X";
+		} else {
+			letraJogador = "O";
+		}
+		do {				
+			System.out.println("Jogador "+ jogador +" informe uma posiï¿½ï¿½o: ");
+			posicao=sc.next();
+			while(!jogo.Valido(posicao)) {
+				System.out.println("Jogada Invalida, Tente novamente:");
+				System.out.println("Jogador "+jogador+", informe uma posiï¿½ï¿½o: ");
+				posicao= sc.next();
+				valida=0;
+			}
+			jogo.Jogada(posicao, letraJogador);
+			valida=1;
+		}while(valida==0);
+		jogo.jogadas++;
+		valida=0;
+		return jogadas;
 	}
 
 }
